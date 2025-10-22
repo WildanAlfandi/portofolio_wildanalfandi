@@ -1,5 +1,5 @@
 import { Navbar } from "@/components/layout/Navbar"
-import { Footer } from "@/components/layout/Footer"
+import { Sidebar } from "@/components/layout/Sidebar"
 import { HeroSection } from "@/components/sections/HeroSection"
 import { AboutSection } from "@/components/sections/AboutSection"
 import { ProjectsSection } from "@/components/sections/ProjectsSection"
@@ -9,11 +9,11 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-slate-900">
       <Navbar />
+      <Sidebar />
       <HeroSection />
       <AboutSection />
       <ProjectsSection />
       <ContactSection />
-      <Footer />
     </div>
   )
 }

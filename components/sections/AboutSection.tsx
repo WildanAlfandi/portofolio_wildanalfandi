@@ -13,19 +13,6 @@ export function AboutSection() {
             <p className="text-gray-600 dark:text-slate-400 mb-6 text-lg italic">
               A brief introduction about me and my interest.
             </p>
-            
-            <p className="text-gray-600 dark:text-slate-300 mb-4 leading-relaxed">
-              I'm a Full-Stack Web Developer with expertise in modern web technologies including React.js, 
-              Next.js, Laravel, and Node.js. Experienced in building scalable web applications, authentication 
-              systems, and cloud deployments through intensive bootcamps and real-world projects.
-            </p>
-            
-            <p className="text-gray-600 dark:text-slate-300 mb-6 leading-relaxed">
-              Currently a student at Primagraha University, Department of Information Systems (2021-2025). 
-              I've completed training programs at Bangkit Academy (Google, GoTo, Traveloka) and built 
-              real-world applications that solve actual problems.
-            </p>
-
             <a 
   href="/about"  // ← GANTI DARI #projects JADI /about
   className="inline-block px-6 py-3 bg-slate-800 dark:bg-white text-white dark:text-slate-900 font-semibold rounded-lg hover:bg-slate-700 dark:hover:bg-gray-100 transition-colors"
