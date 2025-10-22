@@ -1,0 +1,38 @@
+export const projects = [
+  {
+    id: 1,
+    title: "Manufacturing Management System",
+    description: "Comprehensive manufacturing management system handling inventory, transactions, and financial reporting. Implemented RBAC with 3 user levels, built 15+ RESTful controllers, and reduced manual inventory tracking time by 70%.",
+    tags: ["Laravel", "PHP 8.2", "MySQL", "Tailwind CSS", "Alpine.js"],
+    color: "blue",
+    github: "https://github.com/WildanAlfandi",
+    demo: null,
+  },
+  {
+    id: 2,
+    title: "Task Management Application - COREnglish",
+    description: "Full-featured task management app built as technical assessment in ~3 hours. Implemented complete CRUD operations with optimistic UI updates, status filtering, pagination, and statistics dashboard.",
+    tags: ["Next.js 15", "TypeScript", "TanStack Query", "Tailwind CSS"],
+    color: "green",
+    github: "https://github.com/WildanAlfandi",
+    demo: "#",
+  },
+  {
+    id: 3,
+    title: "Movie App - Fullstack Web Application",
+    description: "Movie listing platform with genre filters and watchlist features. Implemented secure JWT authentication and optimized API performance for smooth user experience.",
+    tags: ["React.js", "Node.js", "MySQL", "JWT"],
+    color: "purple",
+    github: "https://github.com/WildanAlfandi",
+    demo: "#",
+  },
+]
+
+export const personalInfo = {
+  name: "Wildan Alfandi",
+  title: "Full Stack Developer",
+  description: "A junior fullstack developer specializing in modern Web Development. Passionate about building scalable, user-friendly web applications and exploring modern technologies such as React, Next.js, and Laravel.",
+  email: "wildanalfandi044@gmail.com",
+  github: "https://github.com/WildanAlfandi",
+  linkedin: "https://linkedin.com/in/wildanalfandi",
+}
