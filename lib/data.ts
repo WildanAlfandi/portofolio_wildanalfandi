@@ -7,6 +7,8 @@ export const projects = [
     color: "blue",
     github: "https://github.com/WildanAlfandi",
     demo: null,
+    year: "2025",
+    category: "Web Development",
   },
   {
     id: 2,
@@ -16,6 +18,8 @@ export const projects = [
     color: "green",
     github: "https://github.com/WildanAlfandi",
     demo: "#",
+    year: "2025",
+    category: "Web Development",
   },
   {
     id: 3,
@@ -25,9 +29,10 @@ export const projects = [
     color: "purple",
     github: "https://github.com/WildanAlfandi",
     demo: "#",
+    year: "2025",
+    category: "Web Development",
   },
 ]
-
 export const personalInfo = {
   name: "Wildan Alfandi",
   title: "Full Stack Developer",

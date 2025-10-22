@@ -1,26 +1,137 @@
-import { Navbar } from "@/components/layout/Navbar"
+"use client"
+
+import { useState, useEffect } from "react"
+import { ThemeToggle } from "@/components/ui/ThemeToggle"
 import { Footer } from "@/components/layout/Footer"
-import { Code2, Server, Database, Smartphone } from "lucide-react"
+import { Code2, Server, Database, Smartphone, Menu, X, ArrowLeft } from "lucide-react"
+import Link from "next/link"
 
 export default function AboutPage() {
+  const [menuOpen, setMenuOpen] = useState(false)
+  const [scrollY, setScrollY] = useState(0)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY)
+    }
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-slate-900">
-      <Navbar />
+      {/* Navbar */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-slate-900 shadow-sm">
+        <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+          <div className="flex items-center gap-4">
+            <Link 
+              href="/"
+              className="p-2 hover:bg-gray-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
+            >
+              <ArrowLeft className="w-6 h-6" />
+            </Link>
+            <a href="#" className="text-2xl font-bold text-gray-900 dark:text-white">
+              Wildan
+            </a>
+          </div>
+          
+          <div className="hidden md:flex items-center gap-6">
+            <ThemeToggle />
+          </div>
+
+          <button 
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="md:hidden p-2"
+          >
+            {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
+      </nav>
+
+      {/* Mobile Menu */}
+      {menuOpen && (
+        <div className="fixed inset-0 z-40 bg-slate-900/95 backdrop-blur-md flex items-center justify-center md:hidden">
+          <button 
+            onClick={() => setMenuOpen(false)}
+            className="absolute top-8 right-8 text-white"
+          >
+            <X className="w-8 h-8" />
+          </button>
+          <div className="text-center space-y-8">
+            <h2 className="text-4xl font-bold text-white mb-12">Menu</h2>
+            <Link href="/" onClick={() => setMenuOpen(false)} className="block text-2xl text-white hover:text-blue-400 transition-colors">Home</Link>
+            <a href="#about" onClick={() => setMenuOpen(false)} className="block text-2xl text-white hover:text-blue-400 transition-colors">About</a>
+            <a href="#experience" onClick={() => setMenuOpen(false)} className="block text-2xl text-white hover:text-blue-400 transition-colors">Experience</a>
+            <a href="#education" onClick={() => setMenuOpen(false)} className="block text-2xl text-white hover:text-blue-400 transition-colors">Education</a>
+          </div>
+        </div>
+      )}
       
       {/* Who Am I Section */}
-      <section className="pt-32 pb-20 px-6">
+      <section 
+        id="about"
+        className="pt-32 pb-20 px-6"
+        style={{
+          opacity: Math.max(0, 1 - scrollY / 500),
+          transform: `translateY(${scrollY * 0.3}px)`
+        }}
+      >
         <div className="max-w-6xl mx-auto">
           <h1 className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-8">
             Who Am I?
           </h1>
           
           <div className="grid md:grid-cols-2 gap-12 items-start">
-            {/* Left - Photos Grid Placeholder */}
+            {/* Left - Photos Grid */}
             <div className="grid grid-cols-2 gap-4">
-              <div className="aspect-square rounded-2xl bg-gradient-to-br from-blue-200 to-blue-300 dark:from-slate-700 dark:to-slate-800"></div>
-              <div className="aspect-square rounded-2xl bg-gradient-to-br from-purple-200 to-purple-300 dark:from-slate-700 dark:to-slate-800"></div>
-              <div className="aspect-square rounded-2xl bg-gradient-to-br from-green-200 to-green-300 dark:from-slate-700 dark:to-slate-800"></div>
-              <div className="aspect-square rounded-2xl bg-gradient-to-br from-orange-200 to-orange-300 dark:from-slate-700 dark:to-slate-800"></div>
+              <div 
+                className="aspect-square rounded-2xl bg-gradient-to-br from-blue-200 to-blue-300 dark:from-blue-900 dark:to-blue-700 overflow-hidden shadow-lg hover:scale-105 transition-transform duration-300"
+                style={{
+                  transform: `translateY(${scrollY * 0.05}px)`
+                }}
+              >
+                <img 
+                  src="/images/syifa.jpg" 
+                  alt="wildan1" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div 
+                className="aspect-square rounded-2xl bg-gradient-to-br from-purple-200 to-purple-300 dark:from-purple-900 dark:to-purple-700 overflow-hidden shadow-lg hover:scale-105 transition-transform duration-300"
+                style={{
+                  transform: `translateY(${scrollY * 0.08}px)`
+                }}
+              >
+                <img 
+                  src="/images/wildan2.jpg" 
+                  alt="Wildan 2" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div 
+                className="aspect-square rounded-2xl bg-gradient-to-br from-green-200 to-green-300 dark:from-green-900 dark:to-green-700 overflow-hidden shadow-lg hover:scale-105 transition-transform duration-300"
+                style={{
+                  transform: `translateY(${scrollY * 0.06}px)`
+                }}
+              >
+                <img 
+                  src="/images/wildan3.jpg" 
+                  alt="Wildan 3" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div 
+                className="aspect-square rounded-2xl bg-gradient-to-br from-orange-200 to-orange-300 dark:from-orange-900 dark:to-orange-700 overflow-hidden shadow-lg hover:scale-105 transition-transform duration-300"
+                style={{
+                  transform: `translateY(${scrollY * 0.07}px)`
+                }}
+              >
+                <img 
+                  src="/images/wildan1.jpg" 
+                  alt="Wildan 4" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
             </div>
 
             {/* Right - Bio */}
@@ -49,7 +160,12 @@ export default function AboutPage() {
       </section>
 
       {/* Skills & Expertise Section */}
-      <section className="py-20 px-6 bg-white dark:bg-slate-800/50">
+      <section 
+        className="py-20 px-6 bg-white dark:bg-slate-800/50"
+        style={{
+          opacity: Math.max(0, Math.min(1, (scrollY - 300) / 300))
+        }}
+      >
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white text-center mb-4">
             Skills & Expertise
@@ -61,7 +177,7 @@ export default function AboutPage() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
             {/* Web Development */}
-            <div className="p-6 rounded-2xl border-2 border-gray-200 dark:border-slate-700 hover:border-blue-500 dark:hover:border-blue-500 transition-colors">
+            <div className="p-6 rounded-2xl border-2 border-gray-200 dark:border-slate-700 hover:border-blue-500 dark:hover:border-blue-500 transition-all hover:shadow-xl hover:-translate-y-2 duration-300">
               <div className="w-12 h-12 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mb-4">
                 <Code2 className="w-6 h-6 text-blue-600 dark:text-blue-400" />
               </div>
@@ -74,7 +190,7 @@ export default function AboutPage() {
             </div>
 
             {/* Backend */}
-            <div className="p-6 rounded-2xl border-2 border-gray-200 dark:border-slate-700 hover:border-green-500 dark:hover:border-green-500 transition-colors">
+            <div className="p-6 rounded-2xl border-2 border-gray-200 dark:border-slate-700 hover:border-green-500 dark:hover:border-green-500 transition-all hover:shadow-xl hover:-translate-y-2 duration-300">
               <div className="w-12 h-12 rounded-lg bg-green-100 dark:bg-green-900/30 flex items-center justify-center mb-4">
                 <Server className="w-6 h-6 text-green-600 dark:text-green-400" />
               </div>
@@ -87,7 +203,7 @@ export default function AboutPage() {
             </div>
 
             {/* Database */}
-            <div className="p-6 rounded-2xl border-2 border-gray-200 dark:border-slate-700 hover:border-purple-500 dark:hover:border-purple-500 transition-colors">
+            <div className="p-6 rounded-2xl border-2 border-gray-200 dark:border-slate-700 hover:border-purple-500 dark:hover:border-purple-500 transition-all hover:shadow-xl hover:-translate-y-2 duration-300">
               <div className="w-12 h-12 rounded-lg bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center mb-4">
                 <Database className="w-6 h-6 text-purple-600 dark:text-purple-400" />
               </div>
@@ -100,7 +216,7 @@ export default function AboutPage() {
             </div>
 
             {/* Cloud */}
-            <div className="p-6 rounded-2xl border-2 border-gray-200 dark:border-slate-700 hover:border-orange-500 dark:hover:border-orange-500 transition-colors">
+            <div className="p-6 rounded-2xl border-2 border-gray-200 dark:border-slate-700 hover:border-orange-500 dark:hover:border-orange-500 transition-all hover:shadow-xl hover:-translate-y-2 duration-300">
               <div className="w-12 h-12 rounded-lg bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center mb-4">
                 <Smartphone className="w-6 h-6 text-orange-600 dark:text-orange-400" />
               </div>
@@ -119,17 +235,18 @@ export default function AboutPage() {
               Languages & Frameworks
             </h3>
             <div className="flex flex-wrap justify-center gap-3">
-              <span className="px-4 py-2 rounded-full border-2 border-gray-200 dark:border-slate-700 text-sm font-medium">HTML</span>
-              <span className="px-4 py-2 rounded-full border-2 border-gray-200 dark:border-slate-700 text-sm font-medium">CSS</span>
-              <span className="px-4 py-2 rounded-full border-2 border-gray-200 dark:border-slate-700 text-sm font-medium">JavaScript</span>
-              <span className="px-4 py-2 rounded-full border-2 border-gray-200 dark:border-slate-700 text-sm font-medium">TypeScript</span>
-              <span className="px-4 py-2 rounded-full border-2 border-gray-200 dark:border-slate-700 text-sm font-medium">PHP</span>
-              <span className="px-4 py-2 rounded-full border-2 border-gray-200 dark:border-slate-700 text-sm font-medium">React</span>
-              <span className="px-4 py-2 rounded-full border-2 border-gray-200 dark:border-slate-700 text-sm font-medium">Next.js</span>
-              <span className="px-4 py-2 rounded-full border-2 border-gray-200 dark:border-slate-700 text-sm font-medium">Laravel</span>
-              <span className="px-4 py-2 rounded-full border-2 border-gray-200 dark:border-slate-700 text-sm font-medium">Node.js</span>
-              <span className="px-4 py-2 rounded-full border-2 border-gray-200 dark:border-slate-700 text-sm font-medium">Express.js</span>
-              <span className="px-4 py-2 rounded-full border-2 border-gray-200 dark:border-slate-700 text-sm font-medium">TailwindCSS</span>
+              {['HTML', 'CSS', 'JavaScript', 'TypeScript', 'PHP', 'React', 'Next.js', 'Laravel', 'Node.js', 'Express.js', 'TailwindCSS'].map((tech, index) => (
+                <span 
+                  key={tech}
+                  className="px-4 py-2 rounded-full border-2 border-gray-200 dark:border-slate-700 text-sm font-medium hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all cursor-pointer"
+                  style={{
+                    animation: `fadeIn 0.5s ease-in-out ${index * 0.1}s forwards`,
+                    opacity: 0
+                  }}
+                >
+                  {tech}
+                </span>
+              ))}
             </div>
           </div>
 
@@ -139,22 +256,31 @@ export default function AboutPage() {
               Tools & Technologies
             </h3>
             <div className="flex flex-wrap justify-center gap-3">
-              <span className="px-4 py-2 rounded-full border-2 border-gray-200 dark:border-slate-700 text-sm font-medium">Git</span>
-              <span className="px-4 py-2 rounded-full border-2 border-gray-200 dark:border-slate-700 text-sm font-medium">GitHub</span>
-              <span className="px-4 py-2 rounded-full border-2 border-gray-200 dark:border-slate-700 text-sm font-medium">VS Code</span>
-              <span className="px-4 py-2 rounded-full border-2 border-gray-200 dark:border-slate-700 text-sm font-medium">Postman</span>
-              <span className="px-4 py-2 rounded-full border-2 border-gray-200 dark:border-slate-700 text-sm font-medium">Figma</span>
-              <span className="px-4 py-2 rounded-full border-2 border-gray-200 dark:border-slate-700 text-sm font-medium">MySQL</span>
-              <span className="px-4 py-2 rounded-full border-2 border-gray-200 dark:border-slate-700 text-sm font-medium">MongoDB</span>
-              <span className="px-4 py-2 rounded-full border-2 border-gray-200 dark:border-slate-700 text-sm font-medium">GCP</span>
-              <span className="px-4 py-2 rounded-full border-2 border-gray-200 dark:border-slate-700 text-sm font-medium">Vercel</span>
+              {['Git', 'GitHub', 'VS Code', 'Postman', 'Figma', 'MySQL', 'MongoDB', 'GCP', 'Vercel'].map((tool, index) => (
+                <span 
+                  key={tool}
+                  className="px-4 py-2 rounded-full border-2 border-gray-200 dark:border-slate-700 text-sm font-medium hover:border-green-500 hover:bg-green-50 dark:hover:bg-green-900/20 transition-all cursor-pointer"
+                  style={{
+                    animation: `fadeIn 0.5s ease-in-out ${index * 0.1}s forwards`,
+                    opacity: 0
+                  }}
+                >
+                  {tool}
+                </span>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
       {/* Professional Experience */}
-      <section className="py-20 px-6">
+      <section 
+        id="experience"
+        className="py-20 px-6"
+        style={{
+          opacity: Math.max(0, Math.min(1, (scrollY - 800) / 300))
+        }}
+      >
         <div className="max-w-4xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-12">
             Professional Experience
@@ -163,8 +289,8 @@ export default function AboutPage() {
           {/* Timeline */}
           <div className="space-y-12">
             {/* Bangkit Academy */}
-            <div className="relative pl-8 border-l-2 border-blue-500">
-              <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-blue-500"></div>
+            <div className="relative pl-8 border-l-2 border-blue-500 hover:border-l-4 transition-all">
+              <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-blue-500 animate-pulse"></div>
               <div className="mb-2">
                 <span className="inline-block px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs font-semibold">
                   2023
@@ -189,11 +315,11 @@ export default function AboutPage() {
             </div>
 
             {/* Bootcamp */}
-            <div className="relative pl-8 border-l-2 border-green-500">
-              <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-green-500"></div>
+            <div className="relative pl-8 border-l-2 border-green-500 hover:border-l-4 transition-all">
+              <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-green-500 animate-pulse"></div>
               <div className="mb-2">
                 <span className="inline-block px-3 py-1 rounded-full bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 text-xs font-semibold">
-                  2023 - Present
+                  2025
                 </span>
               </div>
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
@@ -219,7 +345,13 @@ export default function AboutPage() {
       </section>
 
       {/* Education */}
-      <section className="py-20 px-6 bg-white dark:bg-slate-800/50">
+      <section 
+        id="education"
+        className="py-20 px-6 bg-white dark:bg-slate-800/50"
+        style={{
+          opacity: Math.max(0, Math.min(1, (scrollY - 1300) / 300))
+        }}
+      >
         <div className="max-w-4xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
             Education
@@ -240,11 +372,6 @@ export default function AboutPage() {
               <p className="text-gray-600 dark:text-slate-300 mb-6">
                 Department of Information Systems
               </p>
-              <div className="grid grid-cols-3 gap-4">
-                <div className="aspect-square rounded-lg bg-gradient-to-br from-blue-200 to-blue-300 dark:from-slate-700 dark:to-slate-800"></div>
-                <div className="aspect-square rounded-lg bg-gradient-to-br from-purple-200 to-purple-300 dark:from-slate-700 dark:to-slate-800"></div>
-                <div className="aspect-square rounded-lg bg-gradient-to-br from-green-200 to-green-300 dark:from-slate-700 dark:to-slate-800"></div>
-              </div>
             </div>
 
             {/* Right - Certifications */}
@@ -253,7 +380,7 @@ export default function AboutPage() {
                 Certifications
               </h3>
               <div className="space-y-4">
-                <div className="p-4 rounded-lg border-2 border-gray-200 dark:border-slate-700">
+                <div className="p-4 rounded-lg border-2 border-gray-200 dark:border-slate-700 hover:border-blue-500 transition-all hover:shadow-lg">
                   <div className="flex items-start gap-3">
                     <div className="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center flex-shrink-0">
                       <span className="text-blue-600 dark:text-blue-400 text-lg">🏆</span>
@@ -269,7 +396,7 @@ export default function AboutPage() {
                   </div>
                 </div>
 
-                <div className="p-4 rounded-lg border-2 border-gray-200 dark:border-slate-700">
+                <div className="p-4 rounded-lg border-2 border-gray-200 dark:border-slate-700 hover:border-green-500 transition-all hover:shadow-lg">
                   <div className="flex items-start gap-3">
                     <div className="w-10 h-10 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center flex-shrink-0">
                       <span className="text-green-600 dark:text-green-400 text-lg">📜</span>
@@ -279,7 +406,7 @@ export default function AboutPage() {
                         Full-Stack Developer
                       </h4>
                       <p className="text-sm text-gray-600 dark:text-slate-400">
-                        Harisenin.com - 2023
+                        Harisenin.com - 2025
                       </p>
                     </div>
                   </div>
@@ -291,6 +418,19 @@ export default function AboutPage() {
       </section>
 
       <Footer />
+
+      <style jsx>{`
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `}</style>
     </div>
   )
 }
